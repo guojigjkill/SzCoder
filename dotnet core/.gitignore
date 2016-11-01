@@ -16,7 +16,7 @@ debugSettings.json
 project.lock.json
 *.user
 *.suo
-*.cache
+# *.cache
 *.docstates
 _ReSharper.*
 nuget.exe
