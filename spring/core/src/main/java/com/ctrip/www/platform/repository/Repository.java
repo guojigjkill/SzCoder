@@ -1,10 +1,8 @@
 package com.ctrip.www.platform.repository;
 
 import com.ctrip.www.platform.crud.cache.ICache;
-import com.ctrip.www.platform.crud.cache.ICacheFactory;
 import com.ctrip.www.platform.crud.db.IDbCollection;
 import com.ctrip.www.platform.crud.db.IDb;
-import com.ctrip.www.platform.crud.db.IDbFactory;
 import com.ctrip.www.platform.entity.IEntity;
 
 /**
