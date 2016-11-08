@@ -9,14 +9,12 @@ import com.ctrip.www.platform.entity.IEntity;
  * Created by wang.na on 2016/11/7.
  */
 public class Repository<T extends IEntity> implements IRepository<T> {
-    IDb db;
     ICache<T> cache;
     IDbCollection<T> dbCollection;
 
-    public Repository(ICache cache, IDb db){
+    public Repository(ICache<T> cache, IDbCollection<T> dbCollection){
         this.cache = cache;
-        this.db = db;
-        this.dbCollection = this.db.getCollection(getClass().getGenericSuperclass().getTypeName());
+        this.dbCollection = dbCollection;
     }
 
     //ToDo: 区分不存在和空值的情况
@@ -25,12 +23,11 @@ public class Repository<T extends IEntity> implements IRepository<T> {
 
         if(entity == null){
             //从数据库读取，并更新到缓存
+            entity = (T)dbCollection.get(id);
+            cache.update(entity);
+        }
 
-            return (T)dbCollection.get(id);
-        }
-        else{
-            return entity;
-        }
+        return entity;
     }
 
     public boolean update(T entity){

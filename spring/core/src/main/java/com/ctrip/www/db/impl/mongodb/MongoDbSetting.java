@@ -1,5 +1,6 @@
 package com.ctrip.www.db.impl.mongodb;
 
+import com.ctrip.www.platform.crud.db.DbType;
 import com.ctrip.www.platform.crud.db.IDbSetting;
 
 /**
@@ -15,5 +16,10 @@ public class MongoDbSetting implements IDbSetting{
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public DbType getType() {
+        return DbType.MongoDb;
     }
 }

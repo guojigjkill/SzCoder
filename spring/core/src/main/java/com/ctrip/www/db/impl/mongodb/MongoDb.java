@@ -1,5 +1,6 @@
 package com.ctrip.www.db.impl.mongodb;
 
+import com.ctrip.www.platform.context.IContext;
 import com.ctrip.www.platform.crud.db.IDbCollection;
 import com.ctrip.www.platform.crud.db.IDb;
 import com.ctrip.www.platform.crud.db.IDbSetting;
@@ -19,12 +20,12 @@ public class MongoDb implements IDb {
     }
 
     @Override
-    public IDbSetting GetDbSetting() {
-        return this.dbSetting;
+    public IDbSetting getDbSetting() {
+        return dbSetting;
     }
 
     @Override
-    public <T extends IEntity> IDbCollection<T> getCollection(String name) {
+    public <T extends IEntity> IDbCollection<T> getCollection(String collectionName) {
         return null;
     }
 }

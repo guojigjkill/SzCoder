@@ -7,7 +7,7 @@ public abstract class BaseEntity implements IEntity {
     private String id;
 
     public String getId(){
-        return this.id;
+        return id;
     }
 
     public void setId(String id){

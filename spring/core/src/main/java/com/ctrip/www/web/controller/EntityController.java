@@ -7,7 +7,6 @@ import com.ctrip.www.platform.entity.IEntity;
 import com.ctrip.www.platform.repository.IRepositoryFactory;
 import com.ctrip.www.service.impl.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +22,7 @@ public class EntityController {
 
     @Autowired
     public EntityController(IRepositoryFactory repositoryFactory, IDbFactory dbFactory, SampleService sampleService){
+        this.dbFactory = dbFactory;
         this.repositoryFactory = repositoryFactory;
         this.sampleService = sampleService;
     }

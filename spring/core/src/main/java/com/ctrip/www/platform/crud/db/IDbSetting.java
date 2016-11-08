@@ -5,4 +5,5 @@ package com.ctrip.www.platform.crud.db;
  */
 public interface IDbSetting {
     String getName();
+    DbType getType();
 }

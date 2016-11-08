@@ -2,12 +2,14 @@ package com.ctrip.www.platform.repository;
 
 import com.ctrip.www.platform.crud.cache.ICache;
 import com.ctrip.www.platform.crud.cache.ICacheFactory;
-import com.ctrip.www.platform.crud.db.IDb;
+import com.ctrip.www.platform.crud.db.IDbCollection;
 import com.ctrip.www.platform.crud.db.IDbFactory;
 import com.ctrip.www.platform.entity.IEntity;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wang.na on 2016/11/7.
@@ -16,17 +18,24 @@ import java.lang.reflect.Type;
 public class RepositoryFactory implements IRepositoryFactory {
     private IDbFactory dbFactory;
     private ICacheFactory cacheFactory;
+    private Map<String, Object> repositories;
 
     public RepositoryFactory(IDbFactory dbFactory, ICacheFactory cacheFactory){
         this.dbFactory = dbFactory;
         this.cacheFactory = cacheFactory;
+        this.repositories = new HashMap<String, Object>();
     }
 
     @Override
-    public <T extends IEntity> IRepository<T> GetRepository(String dbName, String collectionName) {
-        IDb db = dbFactory.getDb(dbName);
-        ICache cache = cacheFactory.getCache(dbName, collectionName);
+    public <T extends IEntity> IRepository<T> GetRepository(String dbName, String dbCollectionName) {
+        String key = dbName + "." + dbCollectionName;
+        if(!repositories.containsKey(key)){
+            IDbCollection<T> dbCollection = dbFactory.getDb(dbName).getCollection(dbCollectionName);
+            ICache cache = cacheFactory.getCache(dbName, dbCollectionName);
 
-        return new Repository<T>(cache, db);
+            repositories.put(key, new Repository<T>(cache, dbCollection));
+        }
+
+        return (IRepository<T>) repositories.get((key));
     }
 }
