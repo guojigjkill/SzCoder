@@ -44,10 +44,10 @@ public class Repository<T extends IEntity> implements IRepository<T> {
         return true;
     }
 
-    public boolean create(T entity){
+    public String create(T entity){
         cache.create(entity);
         dbCollection.create(entity);
 
-        return true;
+        return entity.getId();
     }
 }

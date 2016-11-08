@@ -18,8 +18,8 @@ public class RedisCache<T extends IEntity> implements ICache<T> {
     }
 
     @Override
-    public boolean create(IEntity entity) {
-        return false;
+    public String create(IEntity entity) {
+        return "";
     }
 
     @Override

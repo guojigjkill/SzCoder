@@ -9,6 +9,7 @@ import com.ctrip.www.platform.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
@@ -21,7 +22,10 @@ import org.springframework.web.context.annotation.SessionScope;
 @Component
 public class SampleService extends BaseService<Sample> {
     @Autowired
+    SampleRepository repository;
+
+    @Autowired
     public SampleService(IRepositoryFactory repositoryFactory, IContextRepository contextRepository) {
-        super(repositoryFactory, contextRepository, "dbName", "collectionName");
+        super(repositoryFactory, contextRepository, "db", "collection");
     }
 }

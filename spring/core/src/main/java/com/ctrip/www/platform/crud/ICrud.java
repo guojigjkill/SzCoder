@@ -9,6 +9,6 @@ import com.ctrip.www.platform.entity.IEntity;
 public interface ICrud<T extends IEntity> {
     T get(String id);
     boolean update(T entity);
-    boolean create(T entity);
+    String create(T entity);
     boolean delete(String id);
 }

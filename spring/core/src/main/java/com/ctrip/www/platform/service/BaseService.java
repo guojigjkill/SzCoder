@@ -49,7 +49,7 @@ public abstract class BaseService<T extends IEntity> implements IService {
         return (T)this.repository.get(id);
     }
 
-    public boolean create(T entity){
+    public String create(T entity){
         System.out.print("create: " + entity.getId());
         return this.repository.create(entity);
     }
