@@ -11,7 +11,6 @@ import java.lang.reflect.Type;
 /**
  * Created by wang.na on 2016/11/7.
  */
-@Component
 public class MongoDb implements IDb {
     IDbSetting dbSetting;
 

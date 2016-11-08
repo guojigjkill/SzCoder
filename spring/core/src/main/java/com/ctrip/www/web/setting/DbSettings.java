@@ -18,6 +18,7 @@ public class DbSettings implements IDbSettings {
     public DbSettings() {
         this.settings = new HashMap<String, IDbSetting>();
         settings.put("Comment", new MongoDbSetting("Comment"));
+        settings.put("dbName", new MongoDbSetting("dbName"));
     }
 
     public IDbSetting getDbSetting(String name){

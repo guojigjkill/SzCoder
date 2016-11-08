@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by wang.na on 2016/11/7.
  */
-@ComponentScan
 @Controller
 @RequestMapping("/entity/{dbName}/{collectionName}")
 public class EntityController {
@@ -23,7 +22,7 @@ public class EntityController {
     private SampleService sampleService;
 
     @Autowired
-    public EntityController(IRepositoryFactory repositoryFactory, IDbFactory dbFactory){
+    public EntityController(IRepositoryFactory repositoryFactory, IDbFactory dbFactory, SampleService sampleService){
         this.repositoryFactory = repositoryFactory;
         this.sampleService = sampleService;
     }
