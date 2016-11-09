@@ -10,5 +10,5 @@ import java.lang.reflect.Type;
  */
 public interface IDb {
     IDbSetting getDbSetting();
-    <T extends IEntity> IDbCollection<T> getCollection(String collectionName);
+    <T extends IEntity> IDbCollection<T> getCollection(Class<T> clazz);
 }

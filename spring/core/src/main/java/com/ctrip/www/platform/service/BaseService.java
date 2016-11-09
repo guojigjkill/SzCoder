@@ -13,14 +13,10 @@ import com.sun.glass.ui.SystemClipboard;
 public abstract class BaseService<T extends IEntity> implements IService {
     private IContextRepository contextRepository;
     private IRepository repository;
-    private String dbName;
-    private String collectionName;
 
-    public BaseService(IRepositoryFactory repositoryFactory, IContextRepository contextRepository, String dbName, String collectionName){
+    public BaseService(IRepositoryFactory repositoryFactory, IContextRepository contextRepository, String dbName, Class<T> clazz){
         this.contextRepository = contextRepository;
-        this.repository = repositoryFactory.GetRepository(dbName, collectionName);
-        this.dbName = dbName;
-        this.collectionName = collectionName;
+        this.repository = repositoryFactory.GetRepository(dbName, clazz);
     }
 
 //    public BaseService(IRepositoryFactory repositoryFactory, IContext context, String dbName, String collectionName){

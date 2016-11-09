@@ -1,5 +1,6 @@
 package com.ctrip.www.web.controller;
 
+import com.ctrip.www.entity.Sample;
 import com.ctrip.www.platform.crud.db.IDbCollection;
 import com.ctrip.www.platform.crud.db.IDb;
 import com.ctrip.www.platform.crud.db.IDbFactory;
@@ -30,9 +31,8 @@ public class EntityController {
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody
     IEntity get(@PathVariable String dbName, @PathVariable String collectionName, @RequestParam(value="id", required=true) String id) {
-        IDb db = dbFactory.getDb(dbName);
-        IDbCollection dbCollection = db.getCollection(collectionName);
-        return dbCollection.get(id);
+        sampleService.create(new Sample("hello"));
+        return  sampleService.get("hello");
     }
 
     @RequestMapping(method=RequestMethod.PUT)

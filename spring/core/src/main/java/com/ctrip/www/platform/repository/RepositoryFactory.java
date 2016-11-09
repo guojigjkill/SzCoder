@@ -27,11 +27,11 @@ public class RepositoryFactory implements IRepositoryFactory {
     }
 
     @Override
-    public <T extends IEntity> IRepository<T> GetRepository(String dbName, String dbCollectionName) {
-        String key = dbName + "." + dbCollectionName;
+    public <T extends IEntity> IRepository<T> GetRepository(String dbName, Class<T> clazz) {
+        String key = dbName + "." + clazz.getSimpleName();
         if(!repositories.containsKey(key)){
-            IDbCollection<T> dbCollection = dbFactory.getDb(dbName).getCollection(dbCollectionName);
-            ICache cache = cacheFactory.getCache(dbName, dbCollectionName);
+            IDbCollection<T> dbCollection = dbFactory.getDb(dbName).getCollection(clazz);
+            ICache cache = cacheFactory.getCache(dbName, clazz.getSimpleName());
 
             repositories.put(key, new Repository<T>(cache, dbCollection));
         }

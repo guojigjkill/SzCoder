@@ -2,12 +2,11 @@ package com.ctrip.www.db.impl;
 
 import com.ctrip.www.db.impl.mongodb.MongoDb;
 import com.ctrip.www.platform.crud.db.*;
-import com.ctrip.www.platform.entity.IEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +18,12 @@ public class DbFactory implements IDbFactory {
     private Map<String, IDbSetting> dbSettings;
     private Map<String, IDb> dbs;
 
+    private final MongoDbFactory mongoDbFactory;
+
     @Autowired
-    public DbFactory(IDbSettings dbSettings){
-        this.dbs = new HashMap<String, IDb>();
+    public DbFactory(IDbSettings dbSettings, MongoDbFactory mongoDbFactory){
+        this.mongoDbFactory = mongoDbFactory;
+        this.dbs = new HashMap<>();
 
         this.dbSettings = dbSettings.getSettings();
         for ( Map.Entry<String, IDbSetting> entry : this.dbSettings.entrySet()) {
@@ -31,7 +33,7 @@ public class DbFactory implements IDbFactory {
 
     public IDb createDb(IDbSetting dbSetting){
         switch (dbSetting.getType()){
-            case MongoDb: return new MongoDb(dbSetting);
+            case MongoDb: return new MongoDb(dbSetting, new MongoTemplate(mongoDbFactory));
             default:break;
         }
 

@@ -1,4 +1,4 @@
-package com.ctrip.www.cache.redis;
+package com.ctrip.www.cache.local;
 
 import com.ctrip.www.platform.crud.cache.ICache;
 import com.ctrip.www.platform.crud.cache.ICacheFactory;
@@ -6,11 +6,12 @@ import com.ctrip.www.platform.entity.IEntity;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by wang.na on 2016/11/8.
+ * Created by wang.na on 2016/11/9.
  */
-public class RedisCacheFactory implements ICacheFactory {
+@Component
+public class LocalCacheFactory implements ICacheFactory {
     @Override
     public <T extends IEntity> ICache getCache(String dbName, String collectionName) {
-        return null;
+        return new LocalCache();
     }
 }
