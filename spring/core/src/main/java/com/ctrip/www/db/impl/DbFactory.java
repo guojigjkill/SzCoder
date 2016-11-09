@@ -2,6 +2,7 @@ package com.ctrip.www.db.impl;
 
 import com.ctrip.www.db.impl.mongodb.MongoDb;
 import com.ctrip.www.platform.crud.db.*;
+import com.mongodb.DB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -33,7 +34,10 @@ public class DbFactory implements IDbFactory {
 
     public IDb createDb(IDbSetting dbSetting){
         switch (dbSetting.getType()){
-            case MongoDb: return new MongoDb(dbSetting, new MongoTemplate(mongoDbFactory));
+            case MongoDb: {
+                DB db = mongoDbFactory.getDb(dbSetting.getName());
+                return new MongoDb(dbSetting, new MongoTemplate(db.getMongo(), dbSetting.getName()));
+            }
             default:break;
         }
 

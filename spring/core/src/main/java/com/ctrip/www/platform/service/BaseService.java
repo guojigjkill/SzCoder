@@ -7,6 +7,8 @@ import com.ctrip.www.platform.repository.IRepository;
 import com.ctrip.www.platform.repository.IRepositoryFactory;
 import com.sun.glass.ui.SystemClipboard;
 
+import java.util.Date;
+
 /**
  * Created by wang.na on 2016/11/7.
  */
@@ -18,13 +20,6 @@ public abstract class BaseService<T extends IEntity> implements IService {
         this.contextRepository = contextRepository;
         this.repository = repositoryFactory.GetRepository(dbName, clazz);
     }
-
-//    public BaseService(IRepositoryFactory repositoryFactory, IContext context, String dbName, String collectionName){
-//        this.context = context;
-//        this.repository = repositoryFactory.GetRepository(dbName, collectionName);
-//        this.dbName = dbName;
-//        this.collectionName = collectionName;
-//    }
 
     public IRepository GetRepository(){
         return this.repository;
@@ -47,11 +42,14 @@ public abstract class BaseService<T extends IEntity> implements IService {
 
     public String create(T entity){
         System.out.print("create: " + entity.getId());
+        entity.setCreated(new Date());
         return this.repository.create(entity);
     }
 
     public boolean update(T entity){
         System.out.print("update: " + entity.getId());
+        entity.setLastUpdated(new Date());
+        entity.setLastUpdatedBy(getContext().getId());
         return this.repository.update(entity);
     }
 

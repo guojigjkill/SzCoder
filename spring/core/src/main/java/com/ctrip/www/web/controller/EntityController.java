@@ -31,7 +31,8 @@ public class EntityController {
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody
     IEntity get(@PathVariable String dbName, @PathVariable String collectionName, @RequestParam(value="id", required=true) String id) {
-        sampleService.create(new Sample("hello"));
+        Sample sample = new Sample("1");
+        sampleService.create(sample);
         return  sampleService.get("hello");
     }
 

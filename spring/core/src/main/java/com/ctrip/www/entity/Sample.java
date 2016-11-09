@@ -8,6 +8,7 @@ import com.ctrip.www.platform.entity.IEntity;
  */
 public class Sample extends BaseEntity {
     public Sample(String id){
+        super();
         this.id = id;
     }
 }
