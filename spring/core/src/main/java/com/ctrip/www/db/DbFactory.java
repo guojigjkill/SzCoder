@@ -1,4 +1,4 @@
-package com.ctrip.www.db.impl;
+package com.ctrip.www.db;
 
 import com.ctrip.www.db.impl.mongodb.MongoDb;
 import com.ctrip.www.platform.crud.db.*;
